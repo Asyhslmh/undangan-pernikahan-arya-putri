@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Undangan Putri & Arya</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: Georgia, serif;
+  background: #f8efed;
+  color: #70464c;
+  text-align: center;
+}
+
+#cover {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: linear-gradient(#f8efed, #e8ced0);
+}
+
+h1 { font-size: 40px; }
+
+button {
+  padding: 14px 24px;
+  border: 0;
+  border-radius: 28px;
+  background: #8b4052;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#invitation { display: none; }
+
+iframe {
+  display: block;
+  width: 100%;
+  height: 85vh;
+  border: 0;
+  background: white;
+}
+
+#musicButton {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  z-index: 10;
+}
+</style>
+</head>
+
+<body>
+
+<section id="cover">
+  <p>THE WEDDING OF</p>
+  <h1>Putri & Arya</h1>
+  <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+  <p>Dengan penuh kebahagiaan, kami mengundang Anda.</p>
+  <button onclick="openInvitation()">💌 Buka Undangan</button>
+</section>
+
+<section id="invitation">
+  <iframe
+    id="canvaFrame"
+    title="Undangan Putri dan Arya"
+    src="about:blank">
+  </iframe>
+</section>
+
+<audio id="music" loop preload="auto">
+  <source src="backsound.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicButton" onclick="toggleMusic()" hidden>
+  🔊
+</button>
+
+<script>
+const canvaURL =
+  "https://portfolio-adeliafebyvalentina.my.canva.site/putri-arya";
+
+const music = document.getElementById("music");
+const musicButton = document.getElementById("musicButton");
+
+function openInvitation() {
+  document.getElementById("cover").style.display = "none";
+  document.getElementById("invitation").style.display = "block";
+  document.getElementById("canvaFrame").src = canvaURL;
+  musicButton.hidden = false;
+
+  music.play().then(() => {
+    musicButton.textContent = "🔊";
+  }).catch(() => {
+    musicButton.textContent = "▶️";
+  });
+}
+
+function toggleMusic() {
+  if (music.paused) {
+    music.play().then(() => {
+      musicButton.textContent = "🔊";
+    }).catch(() => {
+      alert("Periksa apakah file backsound.mp3 sudah diunggah.");
+    });
+  } else {
+    music.pause();
+    musicButton.textContent = "🔇";
+  }
+}
+</script>
+
+</body>
+  </html>
